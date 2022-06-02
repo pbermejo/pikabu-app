@@ -5,7 +5,7 @@ import { currency } from '../../utils'
 import { ICartSummary } from '../../interfaces'
 
 interface Props {
-	summaryValues: ICartSummary
+	summaryValues?: ICartSummary
 }
 
 /**

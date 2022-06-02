@@ -30,7 +30,7 @@ interface Props {
  * @returns component layout in html
  */
 const OrderPage: NextPage<Props> = ({ order }) => {
-	const { numberOfItems } = order.cartSummary
+	const { numberOfItems, total } = order.cartSummary
 	const { firstName, lastName, address, address2 = '', zip, city, country, phone } = order.shippingAddress
 	const router = useRouter()
 	const [isPaying, setIsPaying] = useState(false)
@@ -134,7 +134,7 @@ const OrderPage: NextPage<Props> = ({ order }) => {
 													purchase_units: [
 														{
 															amount: {
-																value: `${order.total}`,
+																value: `${total}`,
 															},
 														},
 													],

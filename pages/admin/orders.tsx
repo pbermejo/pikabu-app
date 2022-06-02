@@ -46,9 +46,9 @@ const OrdersPage = () => {
 		id: order._id,
 		email: (order.user as IUser).email,
 		name: (order.user as IUser).name,
-		total: order.total,
+		total: order.cartSummary.total,
 		isPaid: order.isPaid,
-		noProducts: order.numberOfItems,
+		noProducts: order.cartSummary.numberOfItems,
 		createdAt: order.createdAt,
 	}))
 

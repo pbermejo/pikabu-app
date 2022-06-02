@@ -120,7 +120,8 @@ export const AuthProvider: FC = ({ children }) => {
 			if (axios.isAxiosError(error)) {
 				return {
 					hasError: true,
-					message: error.response?.data.message as string,
+					// message: error.response?.data.message as string,
+					message: error.response?.data as string,
 				}
 			}
 

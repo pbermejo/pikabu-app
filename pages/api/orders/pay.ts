@@ -78,7 +78,7 @@ const payOrder = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 		return res.status(400).json({ message: 'Orden no existe en nuestra base de datos' })
 	}
 
-	if (dbOrder.total !== Number(data.purchase_units[0].amount.value)) {
+	if (dbOrder.cartSummary.total !== Number(data.purchase_units[0].amount.value)) {
 		await db.disconnect()
 		return res.status(400).json({ message: 'Los montos de PayPal y nuestra orden no son iguales' })
 	}

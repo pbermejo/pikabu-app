@@ -6,7 +6,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
 import { Grid, Select, MenuItem } from '@mui/material'
 
 import { AdminLayout } from '../../components/layouts'
-import { IUser } from '../../interfaces'
+import { IRole, IUser } from '../../interfaces'
 import { pikabuApi } from '../../api'
 
 const UsersPage = () => {
@@ -21,7 +21,7 @@ const UsersPage = () => {
 
 	if (!data && !error) return <></>
 
-	const onRoleUpdated = async (userId: string, newRole: string) => {
+	const onRoleUpdated = async (userId: string, newRole: IRole) => {
 		const previosUsers = users.map(user => ({ ...user }))
 		const updatedUsers = users.map(user => ({
 			...user,
