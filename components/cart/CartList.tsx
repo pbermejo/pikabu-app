@@ -81,7 +81,7 @@ export const CartList: FC<Props> = ({ editable = false, products }) => {
 						{editable && (
 							<Button
 								variant='text'
-								color='secondary'
+								color='primary'
 								onClick={() => onRemoveProductSize(product as ICartProduct)}
 							>
 								Quitar

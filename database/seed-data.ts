@@ -721,6 +721,12 @@ export const initialData: SeedData = {
 	],
 	users: [
 		{
+			email: 'su@test.pikabu.com',
+			name: 'Pablo Bermejo',
+			password: bcrypt.hashSync('abc123.'),
+			role: 'super-user',
+		},
+		{
 			email: 'admin@test.pikabu.com',
 			name: 'Pablo Bermejo',
 			password: bcrypt.hashSync('abc123.'),

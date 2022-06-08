@@ -16,4 +16,4 @@ export interface IUser {
 /**
  * Contract for defining user role
  */
-export type IRole = "admin" | "client";
+export type IRole = "super-user" | "admin" | "client";

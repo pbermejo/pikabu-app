@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { PeopleOutline } from '@mui/icons-material'
+import { DeleteOutlined, PeopleOutline } from '@mui/icons-material'
 import useSWR from 'swr'
 
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
-import { Grid, Select, MenuItem } from '@mui/material'
+import { Grid, Select, MenuItem, IconButton, Typography } from '@mui/material'
 
 import { AdminLayout } from '../../components/layouts'
 import { IRole, IUser } from '../../interfaces'
@@ -39,6 +39,24 @@ const UsersPage = () => {
 		}
 	}
 
+	const onDeleteUser = async (userId: string) => {
+		// Delete from collection
+		const updatedUsers = users.filter(user => {
+			return user._id !== userId
+		})
+
+		setUsers(updatedUsers)
+
+		// Delete from db
+		try {
+			await pikabuApi.delete(`/admin/users/${userId}`)
+		} catch (error) {
+			setUsers(users)
+			console.log(error)
+			alert('No se pudo borrar el usuario')
+		}
+	}
+
 	const columns: GridColDef[] = [
 		{ field: 'email', headerName: 'Correo', width: 250 },
 		{ field: 'name', headerName: 'Nombre completo', width: 300 },
@@ -47,6 +65,9 @@ const UsersPage = () => {
 			headerName: 'Rol',
 			width: 300,
 			renderCell: ({ row }: GridValueGetterParams) => {
+				if(row.role === 'super-user'){
+					return <Typography>Super User (unmodifiable)</Typography>
+				}
 				return (
 					<Select
 						value={row.role}
@@ -56,9 +77,19 @@ const UsersPage = () => {
 					>
 						<MenuItem value='admin'> Admin </MenuItem>
 						<MenuItem value='client'> Client </MenuItem>
-						<MenuItem value='super-user'> Super User </MenuItem>
-						<MenuItem value='SEO'> SEO </MenuItem>
+						
 					</Select>
+				)
+			},
+		},
+		{
+			field: 'delete',
+			headerName: 'Borrar',
+			renderCell: ({ row }: GridValueGetterParams) => {
+				return (
+					<IconButton color='error' disabled={row.role === 'super-user'} onClick={() => onDeleteUser(row.id)}>
+						<DeleteOutlined />
+					</IconButton>
 				)
 			},
 		},
