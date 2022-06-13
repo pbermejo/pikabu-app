@@ -120,7 +120,18 @@ const LoginPage = () => {
 								href={router.query.p ? `/auth/register?p=${router.query.p}` : '/auth/register'}
 								passHref
 							>
-								<Link>¿No tienes cuenta?</Link>
+								<Link>No tengo cuenta</Link>
+							</NextLink>
+						</Grid>
+
+						<Grid item xs={12} display='flex' justifyContent={'end'}>
+							<NextLink
+								href={
+									router.query.p ? `/auth/reset-password?p=${router.query.p}` : '/auth/reset-password'
+								}
+								passHref
+							>
+								<Link>No recuerdo la contraseña</Link>
 							</NextLink>
 						</Grid>
 

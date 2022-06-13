@@ -13,14 +13,14 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 1: Registro y autenticación mediante usuario y contraseña
+						Registro y autenticación mediante usuario y contraseña
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Typography>Desde la pantalla principal se accede al login y al registro:</Typography>
 					<ol>
 						<li>Menú `{'>'}` Entrar.</li>
-						<li>Tocar en “¿No tienes cuenta?”.</li>
+						<li>Tocar en “No tengo cuenta”.</li>
 						<li>Cubre los datos del formulario y regístrate.</li>
 						<li>Tu usuario ya está registrado y autenticado automáticamente.</li>
 					</ol>
@@ -29,7 +29,7 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 2: Registro y autenticación mediante OAuth
+						Registro y autenticación mediante OAuth
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -51,7 +51,29 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 3: Búsqueda de productos, compra y pago con Paypal
+						Recuperación de contraseña
+					</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Typography>Desde la pantalla principal se accede al login:</Typography>
+					<ol>
+						<li>Menú `{'>'}` Entrar.</li>
+						<li>Tocar en “No recuerdo la contraseña”.</li>
+						<li>Introduce tu correo en el formulario.</li>
+						<li>
+							Te llegará un correo con el enlace de activación para el cambio de contraseña. Toca en el
+							enlace o copia y pega la url en el navegador.
+						</li>
+						<li>En la pantalla de reseteo de contraseña introduce la nueva contraseña.</li>
+						<li>Se habrá modificado tu contraseña y serás redirigido al login para autenticarte.</li>
+						<li>En el login cubre el formulario con tu nueva contraseña para entrar en la app.</li>
+					</ol>
+				</AccordionDetails>
+			</Accordion>
+			<Accordion>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+					<Typography component='h2' variant='h2'>
+						Búsqueda de productos, compra y pago con Paypal
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -99,7 +121,7 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 4: (Admin) Estadísticas del sitio
+						(Admin) Estadísticas del sitio
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -117,7 +139,7 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 5: (Admin) Modificación de rol de usuario
+						(Admin) Modificación de rol de usuario
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -137,7 +159,7 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 6: (Admin) Eliminación de usuario
+						(Admin) Eliminación de usuario
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -157,7 +179,7 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 7: (Admin) Creación de ProductSlideshow
+						(Admin) Creación de ProductSlideshow
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -178,7 +200,7 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 8: (Admin) Modificación de producto
+						(Admin) Modificación de producto
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -198,7 +220,7 @@ const HelPPage = () => {
 			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component='h2' variant='h2'>
-						Caso 9: (Admin) Eliminación de producto
+						(Admin) Eliminación de producto
 					</Typography>
 				</AccordionSummary>
 				<AccordionDetails>

@@ -2,18 +2,34 @@
  * Contract for defining user
  */
 export interface IUser {
-  _id: string;
-  email: string;
-  name: string;
-  password?: string;
-  role: IRole;
+	_id: string
+	email: string
+	name: string
+	password?: string
+	role: IRole
 
-  // Añadido createdAt y updatedAt de mongo
-  createdAt?: string;
-  updatedAt?: string;
+	// Añadido createdAt y updatedAt de mongo
+	createdAt?: string
+	updatedAt?: string
 }
 
 /**
  * Contract for defining user role
  */
-export type IRole = "super-user" | "admin" | "client";
+export type IRole = 'super-user' | 'admin' | 'client'
+
+/**
+ * Contract for defining an user to be updated
+ */
+export interface IUserUpdate {
+	_id: string
+	email?: string
+	name?: string
+	password?: string
+	role?: IRole
+}
+
+export interface IActivationHash {
+	_id: string
+	userId: string
+}

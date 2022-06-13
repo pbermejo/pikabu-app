@@ -1,7 +1,10 @@
-import axios from "axios";
+import axios from 'axios'
 
+/**
+ * Method for instantiating axios calls to API
+ */
 const pikabuApi = axios.create({
-	baseURL: "/api",
-});
+	baseURL: '/api',
+})
 
-export default pikabuApi;
+export default pikabuApi

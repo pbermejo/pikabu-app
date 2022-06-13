@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { IUser } from '../../interfaces'
+import { IUser, IUserUpdate } from '../../interfaces'
 
 interface ContextProps {
 	isLoggedIn: boolean
@@ -13,6 +13,11 @@ interface ContextProps {
 		name: string,
 		password: string
 	) => Promise<{
+		hasError: boolean
+		message?: string
+	}>
+
+	updateUser: (updatedUser: IUserUpdate) => Promise<{
 		hasError: boolean
 		message?: string
 	}>

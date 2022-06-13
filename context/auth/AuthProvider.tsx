@@ -1,5 +1,5 @@
 import { FC, useReducer, useEffect } from 'react'
-import { IUser } from '../../interfaces'
+import { IUser, IUserUpdate } from '../../interfaces'
 import { AuthContext, authReducer } from './'
 import { pikabuApi } from '../../api'
 import Cookies from 'js-cookie'
@@ -46,30 +46,9 @@ export const AuthProvider: FC = ({ children }) => {
 	useEffect(() => {
 		// autoLogin()
 		if (status === 'authenticated') {
-			console.log({ user: data?.user })
 			dispatch({ type: '[Auth] - Login', payload: data?.user as IUser })
 		}
 	}, [status, data])
-
-	/**
-	 * DEPRECATED: Method for login an user automatically if user token is valid
-	 */
-	const autoLogin = async () => {
-		// Avoid request if token does not exist
-		if (!Cookies.get('token')) {
-			return
-		}
-
-		try {
-			const { data } = await pikabuApi.get('/user/validate-token')
-
-			const { token, user } = data
-			Cookies.set('token', token)
-			dispatch({ type: '[Auth] - Login', payload: user })
-		} catch (error) {
-			Cookies.remove('token')
-		}
-	}
 
 	/**
 	 * Method for login an user and saving token on cookie
@@ -132,6 +111,41 @@ export const AuthProvider: FC = ({ children }) => {
 		}
 	}
 
+	/**
+	 * Method for updating an user
+	 * @param updatedUser
+	 * @returns true if action is OK. False if an error occurs
+	 */
+	const updateUser = async (updatedUser: IUserUpdate): Promise<{ hasError: boolean; message?: string }> => {
+		try {
+			const { data } = await pikabuApi.post(`/user/${updatedUser._id}`, updatedUser)
+			const user = {
+				_id: data._id,
+				name: data.name,
+				email: data.email,
+				role: data.role,
+			}
+			dispatch({ type: '[Auth] - Update', payload: user as IUser })
+
+			return {
+				hasError: false,
+			}
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				return {
+					hasError: true,
+					// message: error.response?.data.message as string,
+					message: error.response?.data as string,
+				}
+			}
+
+			return {
+				hasError: true,
+				message: '[Auth/update] - No se pudo modificar el usuario - intente de nuevo',
+			}
+		}
+	}
+
 	const logout = () => {
 		Cookies.remove('cart')
 		Cookies.remove('firstName')
@@ -157,6 +171,7 @@ export const AuthProvider: FC = ({ children }) => {
 				loginUser,
 				registerUser,
 				logout,
+				updateUser,
 			}}
 		>
 			{children}
