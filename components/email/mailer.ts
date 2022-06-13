@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import nodemailer, { TransportOptions } from 'nodemailer'
 import { google } from 'googleapis'
 
 /**
@@ -28,7 +28,7 @@ export const mailer = async () => {
 
 	// Creates transport
 	const transporter = nodemailer.createTransport({
-		service: 'Gmail',
+		service: 'gmail',
 		auth: {
 			type: 'OAuth2',
 			user: process.env.GOOGLE_EMAIL,
@@ -37,7 +37,7 @@ export const mailer = async () => {
 			clientSecret: process.env.OAUTH_SECRET,
 			refreshToken: process.env.OAUTH_REFRESH_TOKEN,
 		},
-	})
+	} as TransportOptions)
 
 	return transporter
 }

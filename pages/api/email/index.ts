@@ -33,19 +33,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 const sendEmail = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	let { email, hash } = req.body
 
-	// Builds a reset password email
-	const sendEmail = async emailOptions => {
+	// Builds a reset password email and sends it
+	const sendEmail = async () => {
 		let emailTransporter = await mailer()
-		await emailTransporter.sendMail(emailOptions)
+		await emailTransporter.sendMail({
+			subject: 'Pikabu - Reset Password',
+			text: `Acceda a esta dirección para modificar su contraseña de forma segura o cópiala y pégala en el navegador: ${process.env.HOST_NAME}auth/reset-password/${hash}?email=${email}`,
+			to: email,
+			from: process.env.GOOGLE_EMAIL,
+		})
 	}
-
-	// Sends email to user
-	sendEmail({
-		subject: 'Pikabu - Reset Password',
-		text: `Acceda a esta dirección para modificar su contraseña de forma segura o cópiala y pégala en el navegador: ${process.env.HOST_NAME}auth/reset-password/${hash}?email=${email}`,
-		to: email,
-		from: process.env.GOOGLE_EMAIL,
-	})
 
 	res.status(200).json({ message: 'Email sent' })
 }

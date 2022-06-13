@@ -49,7 +49,7 @@ const RequestPasswordResetPage = () => {
 			await pikabuApi.post('/email', { email: user.email, hash: hash._id })
 		} catch (error) {
 			setShowError(true)
-			setErrorMessage(error.response?.data.message as string)
+			setErrorMessage('Ha habido un error')
 			setTimeout(() => {
 				setShowError(false)
 			}, 3000)

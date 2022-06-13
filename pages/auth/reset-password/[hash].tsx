@@ -51,7 +51,7 @@ const ResetPasswordPage: NextPage<Props> = ({ activationHash }) => {
 			await pikabuApi.post(`/user/${activationHash.userId}`, { password })
 		} catch (error) {
 			setShowError(true)
-			setErrorMessage(error.response?.data.message as string)
+			setErrorMessage('Ha habido un error')
 			setTimeout(() => {
 				setShowError(false)
 			}, 3000)
@@ -61,7 +61,7 @@ const ResetPasswordPage: NextPage<Props> = ({ activationHash }) => {
 		try {
 			await pikabuApi.delete(`/activationHash/${activationHash._id}`)
 		} catch (error) {
-			console.log(error.response?.data.message as string)
+			console.log('Ha habido un error')
 		}
 
 		// Redirect user to login when password is yet reset

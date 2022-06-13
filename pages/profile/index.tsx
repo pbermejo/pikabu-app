@@ -59,7 +59,7 @@ const UserProfilePage: NextPage = () => {
 	 */
 	const onUpdateUser = async ({ email, name, password, role }: FormData) => {
 		setShowError(false)
-		let updatedUser: IUserUpdate = { _id: user._id! }
+		let updatedUser: IUserUpdate = { _id: user?._id || '' }
 
 		// Update only modified data
 		if (email) {
