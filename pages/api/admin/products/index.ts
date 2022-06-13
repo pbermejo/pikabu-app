@@ -8,8 +8,18 @@ import { db } from '../../../../database'
 import { IProduct } from '../../../../interfaces/products'
 import { Product } from '../../../../models'
 
+/**
+ * Contract for response data
+ */
 type Data = { message: string } | IProduct[] | IProduct
 
+/**
+ * Method for handling admin products endpoint
+ * @param req An object with the request
+ * @param res An object with the response
+ * @returns NextApiResponse<Data> A REST API Response with data requested.
+ * On error returns a response with corresponding code and error
+ */
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 	switch (req.method) {
 		case 'GET':
@@ -26,6 +36,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 	}
 }
 
+/**
+ * Method for getting all products
+ * @param req An object with the request
+ * @param res An object with the response
+ * @returns NextApiResponse<Data> A REST API Response with data requested.
+ * On error returns a response with corresponding code and error
+ */
 const getProducts = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	await db.connect()
 
@@ -33,7 +50,6 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
 	await db.disconnect()
 
-	// TODO:
 	const updatedProducts = products.map(product => {
 		product.images = product.images.map(image => {
 			return image.includes('http') ? image : `${process.env.HOST_NAME}products/${image}`
@@ -45,6 +61,13 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	res.status(200).json(updatedProducts)
 }
 
+/**
+ * Method for updating a product by its id
+ * @param req An object with the request
+ * @param res An object with the response
+ * @returns NextApiResponse<Data> A REST API Response with data requested.
+ * On error returns a response with corresponding code and error
+ */
 const updateProduct = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { _id = '', images = [] } = req.body as IProduct
 
@@ -88,6 +111,13 @@ const updateProduct = async (req: NextApiRequest, res: NextApiResponse<Data>) =>
 	}
 }
 
+/**
+ * Method for creating a product
+ * @param req An object with the request
+ * @param res An object with the response
+ * @returns NextApiResponse<Data> A REST API Response with data requested.
+ * On error returns a response with corresponding code and error
+ */
 const createProduct = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { images = [] } = req.body as IProduct
 

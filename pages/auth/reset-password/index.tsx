@@ -17,7 +17,7 @@ type FormData = {
 }
 
 /**
- * Page component for login
+ * Page component for reset password
  * @returns component layout in html
  */
 const RequestPasswordResetPage = () => {
@@ -34,13 +34,12 @@ const RequestPasswordResetPage = () => {
 	const [showError, setShowError] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('No se reconoce el usurio')
 	const [operationComplete, setOperationComplete] = useState(false)
-	// const { sendEmail } = useContext(NotificationsContext)
 
 	/**
-	 * Method for handling login event
+	 * Method for handling reset password event
 	 * @param param0 data from form
 	 */
-	const onResetPassword = async ({ email }: FormData) => {
+	const onRequestResetPassword = async ({ email }: FormData) => {
 		setShowError(false)
 
 		try {
@@ -59,7 +58,7 @@ const RequestPasswordResetPage = () => {
 
 	return (
 		<AuthLayout title={'Reset password'}>
-			<form onSubmit={handleSubmit(onResetPassword)} noValidate>
+			<form onSubmit={handleSubmit(onRequestResetPassword)} noValidate>
 				<Box sx={{ width: 350, padding: '10px 20px' }}>
 					<Grid container spacing={2}>
 						<Grid item xs={12}>

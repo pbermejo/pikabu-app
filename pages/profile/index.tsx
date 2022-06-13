@@ -21,34 +21,30 @@ type FormData = {
 	role?: IRole
 }
 
+/**
+ * Page component for user profile
+ * @param param0: object implementing Props interface
+ * @returns component layout in html
+ */
 const UserProfilePage: NextPage = () => {
+	const passwordMinChars = Number(process.env.USER_PASSWORD_MIN_CHARS) || 6
+	const nameMinChars = Number(process.env.USER_NAME_MIN_CHARS) || 2
+	// Configure form handling
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormData>()
-
-	/**
-	 * Show error state handler
-	 */
 	const [showError, setShowError] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
-
-	/**
-	 * Validation conditions
-	 */
-	const passwordMinChars = Number(process.env.USER_PASSWORD_MIN_CHARS) || 6
-	const nameMinChars = Number(process.env.USER_NAME_MIN_CHARS) || 2
-
 	const { user, updateUser, logout } = useContext(AuthContext)
 	const router = useRouter()
 
+	// Make async call to get user info
 	const { data, error } = useSWR<IUser>(`/api/user/${user?._id}`)
-
 	if (!error && !data) {
 		return <></>
 	}
-
 	if (error) {
 		console.log(error)
 		return <Typography>Error al cargar la información</Typography>
@@ -64,6 +60,8 @@ const UserProfilePage: NextPage = () => {
 	const onUpdateUser = async ({ email, name, password, role }: FormData) => {
 		setShowError(false)
 		let updatedUser: IUserUpdate = { _id: user._id! }
+
+		// Update only modified data
 		if (email) {
 			updatedUser = { ...updatedUser, email }
 		}
@@ -86,8 +84,8 @@ const UserProfilePage: NextPage = () => {
 			return
 		}
 
+		// Call Auth provider method to update user and dispatch further actions
 		const { hasError, message } = await updateUser(updatedUser)
-
 		if (hasError) {
 			setShowError(true)
 			setErrorMessage(message!)
@@ -97,6 +95,10 @@ const UserProfilePage: NextPage = () => {
 			return
 		}
 
+		/**
+		 * If the user is updated, force log out and redirect to login.
+		 * It must be logged out in order to reload new user data by cookies and session
+		 */
 		logout()
 		router.replace('/auth/login')
 	}

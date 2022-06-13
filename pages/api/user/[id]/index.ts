@@ -50,6 +50,13 @@ const getUserById = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	return res.status(200).json(user)
 }
 
+/**
+ * Method for updating user info
+ * @param req An object with the request
+ * @param res An object with the response
+ * @returns NextApiResponse<Data> A REST API Response with data requested.
+ * On error returns a response with corresponding code and error
+ */
 const updateUser = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { id } = req.query
 	const { email, name, password, role } = req.body

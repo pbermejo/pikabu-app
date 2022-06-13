@@ -16,7 +16,7 @@ const orderSchema = new Schema(
 						required: true,
 						enum: {
 							values: ['men', 'women', 'kids', 'unisex'],
-							message: '{VALUE} no es un género válido',
+							message: '{VALUE} is not a valid gender',
 						},
 					},
 				],
@@ -29,7 +29,7 @@ const orderSchema = new Schema(
 						required: true,
 						enum: {
 							values: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-							message: '{VALUE} no es un tamaño válido',
+							message: '{VALUE} is not a valid size',
 						},
 					},
 				],

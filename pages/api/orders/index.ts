@@ -4,6 +4,7 @@ import { IOrder } from '../../../interfaces'
 import { connect } from '../../../database/dbDriver'
 import { db } from '../../../database'
 import { Order, Product } from '../../../models'
+
 /**
  * Contract for response data
  */

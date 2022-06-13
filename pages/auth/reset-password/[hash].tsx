@@ -64,8 +64,7 @@ const ResetPasswordPage: NextPage<Props> = ({ activationHash }) => {
 			console.log(error.response?.data.message as string)
 		}
 
-		dbUsers.resetPassword('asdfasdf', 'asdfasd')
-		// Redirect to login
+		// Redirect user to login when password is yet reset
 		router.replace(`/auth/login`)
 	}
 

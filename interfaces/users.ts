@@ -29,6 +29,9 @@ export interface IUserUpdate {
 	role?: IRole
 }
 
+/**
+ * Contract for defining an activation hash
+ */
 export interface IActivationHash {
 	_id: string
 	userId: string

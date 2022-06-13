@@ -1,3 +1,6 @@
+/**
+ * Countries constants
+ */
 export const countries = [
 	{
 		name: 'Costa Rica',

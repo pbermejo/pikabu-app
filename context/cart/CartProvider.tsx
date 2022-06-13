@@ -158,7 +158,7 @@ export const CartProvider: FC = ({ children }) => {
 
 	const createOrder = async (): Promise<{ hasError: boolean; message: string }> => {
 		if (!state.shippingAddress) {
-			throw new Error('[CartProvider] - No hay dirección de entrega')
+			throw new Error('[CartProvider] - No delivery address found')
 		}
 
 		const body: IOrder = {

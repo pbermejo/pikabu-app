@@ -3,6 +3,9 @@ import GithubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { dbUsers } from '../../../database'
 
+/**
+ * Configuration for Next Auth
+ */
 export default NextAuth({
 	// Configure one or more authentication providers
 	providers: [

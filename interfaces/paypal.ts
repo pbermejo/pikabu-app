@@ -1,3 +1,8 @@
+/**
+ * Contracts for Paypal entities
+ * https://developer.paypal.com
+ */
+
 export interface PaypalOrderStatusResponse {
 	id: string
 	intent: string

@@ -10,7 +10,7 @@ import { IProduct } from '../../../../../interfaces/products'
 type Data = { message: string } | IProduct
 
 /**
- * Method for handling admin products endpoint
+ * Method for handling admin product endpoint
  * @param req An object with the request
  * @param res An object with the response
  * @returns NextApiResponse<Data> A REST API Response with data requested.
@@ -33,7 +33,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
  * @returns NextApiResponse<Data> A REST API Response with data requested.
  * On error returns a response with corresponding code and error
  */
-
 const deleteProduct = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { id = '' } = req.query
 

@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 }
 
 /**
- * Method for getting a user by its id
+ * Method for deleting an activation hash by its id
  * @param req An object with the request
  * @param res An object with the response
  * @returns NextApiResponse<Data> A REST API Response with data requested.
@@ -42,7 +42,7 @@ const deleteActivationHash = async (req: NextApiRequest, res: NextApiResponse<Da
 		const hash = await ActivationHash.findById(id)
 		if (!hash) {
 			await db.disconnect()
-			return res.status(400).json({ message: 'No existe un hash con ese ID' })
+			return res.status(400).json({ message: 'No activation hash found with that ID' })
 		}
 		await hash.delete()
 		await db.disconnect()

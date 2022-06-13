@@ -106,7 +106,7 @@ export const AuthProvider: FC = ({ children }) => {
 
 			return {
 				hasError: true,
-				message: '[Auth/register] - No se pudo crear el usuario - intente de nuevo',
+				message: '[Auth/register] - Unable to create user - please retry',
 			}
 		}
 	}
@@ -141,11 +141,14 @@ export const AuthProvider: FC = ({ children }) => {
 
 			return {
 				hasError: true,
-				message: '[Auth/update] - No se pudo modificar el usuario - intente de nuevo',
+				message: '[Auth/update] - Unable to modify user - please retry',
 			}
 		}
 	}
 
+	/**
+	 * Method for logging out an user
+	 */
 	const logout = () => {
 		Cookies.remove('cart')
 		Cookies.remove('firstName')

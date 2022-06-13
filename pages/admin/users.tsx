@@ -31,7 +31,7 @@ const UsersPage = () => {
 		setUsers(updatedUsers)
 
 		try {
-			await pikabuApi.put('/admin/users', { userId, role: newRole })
+			await pikabuApi.put(`/admin/users/${userId}`, { role: newRole })
 		} catch (error) {
 			setUsers(previosUsers)
 			console.log(error)
@@ -65,7 +65,7 @@ const UsersPage = () => {
 			headerName: 'Rol',
 			width: 300,
 			renderCell: ({ row }: GridValueGetterParams) => {
-				if(row.role === 'super-user'){
+				if (row.role === 'super-user') {
 					return <Typography>Super User (unmodifiable)</Typography>
 				}
 				return (
@@ -77,7 +77,6 @@ const UsersPage = () => {
 					>
 						<MenuItem value='admin'> Admin </MenuItem>
 						<MenuItem value='client'> Client </MenuItem>
-						
 					</Select>
 				)
 			},

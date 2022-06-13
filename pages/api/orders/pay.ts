@@ -4,10 +4,20 @@ import { IPaypal } from '../../../interfaces'
 import { db } from '../../../database'
 import { Order } from '../../../models'
 
+/**
+ * Contract for response data
+ */
 type Data = {
 	message: string
 }
 
+/**
+ * Method for handling payment endpoint
+ * @param req An object with the request
+ * @param res An object with the response
+ * @returns NextApiResponse<Data> A REST API Response with data requested.
+ * On error returns a response with corresponding code and error
+ */
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 	switch (req.method) {
 		case 'POST':
@@ -19,6 +29,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 	}
 }
 
+/**
+ * Method for getting Paypal bearer token
+ * to authenticate against Paypal API
+ * @returns a promise with the response
+ */
 const getPaypalBearerToken = async (): Promise<string | null> => {
 	const PAYPAL_CLIENT = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
 	const PAYPAL_SECRET = process.env.PAYPAL_SECRET
@@ -45,6 +60,13 @@ const getPaypalBearerToken = async (): Promise<string | null> => {
 	}
 }
 
+/**
+ * Method for paying an order
+ * @param req An object with the request
+ * @param res An object with the response
+ * @returns NextApiResponse<Data> A REST API Response with data requested.
+ * On error returns a response with corresponding code and error
+ */
 const payOrder = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	// TODO: validar sesión del usuario
 	// TODO: validar mongoID

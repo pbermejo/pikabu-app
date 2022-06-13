@@ -36,6 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 const resetPassword = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { email } = req.body
 
+	// Get user info from email
 	await db.connect()
 	const user = await User.findOne({ email }).select('email').lean()
 	await db.disconnect()
@@ -44,6 +45,7 @@ const resetPassword = async (req: NextApiRequest, res: NextApiResponse<Data>) =>
 		return res.status(401).json({ message: 'No existe ese usuario' })
 	}
 
+	// Create an activation hash associated to user
 	const hash = new ActivationHash({
 		userId: user._id,
 	})

@@ -1,8 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import nodemailer from 'nodemailer'
-import { google } from 'googleapis'
 import { mailer } from '@/components/email'
-import ActivationHash from '../../../models'
 
 /**
  * Contract for response data
@@ -36,15 +33,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 const sendEmail = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	let { email, hash } = req.body
 
-	//emailOptions - who sends what to whom
+	// Builds a reset password email
 	const sendEmail = async emailOptions => {
 		let emailTransporter = await mailer()
 		await emailTransporter.sendMail(emailOptions)
 	}
 
+	// Sends email to user
 	sendEmail({
 		subject: 'Pikabu - Reset Password',
-		text: `Acceda a esta dirección para modificar su contraseña de forma segura: ${process.env.HOST_NAME}auth/reset-password/${hash}?email=${email}`,
+		text: `Acceda a esta dirección para modificar su contraseña de forma segura o cópiala y pégala en el navegador: ${process.env.HOST_NAME}auth/reset-password/${hash}?email=${email}`,
 		to: email,
 		from: process.env.GOOGLE_EMAIL,
 	})

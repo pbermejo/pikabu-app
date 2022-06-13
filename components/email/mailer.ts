@@ -1,17 +1,22 @@
 import nodemailer from 'nodemailer'
 import { google } from 'googleapis'
 
-export const mailer = async() => {
+/**
+ * Method for handling emails
+ */
+export const mailer = async () => {
 	const oauth2Client = new google.auth.OAuth2(
 		process.env.OAUTH_ID,
 		process.env.OAUTH_SECRET,
 		'https://developers.google.com/oauthplayground'
 	)
 
+	// Sets credentials to authenticate to API
 	oauth2Client.setCredentials({
 		refresh_token: process.env.OAUTH_REFRESH_TOKEN,
 	})
 
+	// Gets API Access token
 	const accessToken = await new Promise((resolve, reject) => {
 		oauth2Client.getAccessToken((err, token) => {
 			if (err) {
@@ -21,6 +26,7 @@ export const mailer = async() => {
 		})
 	})
 
+	// Creates transport
 	const transporter = nodemailer.createTransport({
 		service: 'Gmail',
 		auth: {
