@@ -154,6 +154,7 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
 				router.replace(`/admin/products/${form.slug}`)
 			} else {
 				setIsSaving(false)
+				router.push(`/admin/products`)
 			}
 		} catch (error) {
 			console.log(error)
